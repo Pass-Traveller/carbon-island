@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Island 碳吸岛 | 让建筑废弃物重获新生</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:wght=400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2d5f4c;
+            --accent-green: #52a675;
+            --light-green: #7fc798;
+            --dark-forest: #1a3d2e;
+            --earth-brown: #a67c52;
+            --cream: #f8f6f1;
+            --white: #ffffff;
+            --text-dark: #1f2d27; /* 保持深色文本 */
+            --light-bg: #f5f5f5; /* 新增浅色背景变量 */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--white); /* 修改为白色背景 */
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(255, 255, 255, 0.95); /* 修改为浅色背景 */
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* 修改为浅色边框 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 1rem 5%;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-dark); /* 修改为深色文本 */
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            transform: rotate(-8deg);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(82, 166, 117, 0.3);
+            color: var(--white); /* 保持图标颜色为白色 */
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(0deg);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dark); /* 修改为深色文本 */
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            opacity: 0.9;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--primary-green); /* 悬停颜色 */
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 英雄区 - 全屏沉浸式 */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: var(--light-bg); /* 浅色背景 */
+        }
+
+        /* 背景图片层 */
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* 替换为浅色背景或移除覆盖层 */
+            background: 
+                linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0.85) 100%),
+                url("data:image/svg+xml,%3Csvg width='1920' height='1080' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f0f0f0;stop-opacity:1' /%3E%3Cstop offset='50%25' style='stop-color:%23ffffff;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23f0f0f0;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1920' height='1080' fill='url(%23grad1)' /%3E%3Cg opacity='0.05'%3E%3Ccircle cx='300' cy='200' r='150' fill='%2352a675' /%3E%3Ccircle cx='1600' cy='800' r='200' fill='%237fc798' /%3E%3Ccircle cx='800' cy='600' r='100' fill='%2352a675' /%3E%3Cpath d='M 100 500 Q 400 300 700 500 T 1300 500' stroke='%2352a675' stroke-width='3' fill='none' /%3E%3Cpath d='M 1200 200 Q 1400 400 1600 200' stroke='%237fc798' stroke-width='2' fill='none' /%3E%3C/g%3E%3Cg opacity='0.02'%3E%3Cpath d='M 0 700 Q 300 600 600 700 T 1200 700 L 1920 700 L 1920 1080 L 0 1080 Z' fill='%23e0e0e0' /%3E%3Cpath d='M 0 850 Q 400 780 800 850 T 1600 850 L 1920 850 L 1920 1080 L 0 1080 Z' fill='%23f0f0f0' /%3E%3C/g%3E%3Cg opacity='0.1'%3E%3Ctext x='100' y='150' font-family='Arial' font-size='180' fill='%2352a675' opacity='0.1'%3E♻%3C/text%3E%3Ctext x='1500' y='950' font-family='Arial' font-size='150' fill='%237fc798' opacity='0.1'%3E🌿%3C/text%3E%3C/g%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+            animation: subtleZoom 30s ease-in-out infinite alternate;
+        }
+
+        @keyframes subtleZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        /* 叶子动画装饰 */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        /* 保持深色背景下的叶子颜色，但在浅色背景下可能需要调整透明度或颜色 */
+        .leaf {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.15;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .leaf:nth-child(1) {
+            left: 10%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .leaf:nth-child(2) {
+            left: 80%;
+            top: 40%;
+            animation-delay: 4s;
+        }
+
+        .leaf:nth-child(3) {
+            left: 30%;
+            top: 70%;
+            animation-delay: 8s;
+        }
+
+        .leaf:nth-child(4) {
+            left: 70%;
+            top: 15%;
+            animation-delay: 12s;
+        }
+
+        .leaf:nth-child(5) {
+            left: 50%;
+            top: 80%;
+            animation-delay: 16s;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.1;
+            }
+            25% { 
+                transform: translateY(-30px) rotate(10deg);
+                opacity: 0.2;
+            }
+            50% { 
+                transform: translateY(-50px) rotate(-10deg);
+                opacity: 0.15;
+            }
+            75% { 
+                transform: translateY(-30px) rotate(5deg);
+                opacity: 0.2;
+            }
+        }
+
+        /* 内容层 */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.3rem;
+            background: rgba(82, 166, 117, 0.15);
+            border: 1px solid rgba(82, 166, 117, 0.3);
+            border-radius: 50px;
+            color: var(--primary-green); /* 修改为深色文本 */
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text-dark); /* 修改为深色文本 */
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--accent-green), var(--primary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-dark); /* 修改为深色文本 */
+            opacity: 0.85;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-green); /* 修改为深绿色数字 */
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            opacity: 0.75;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1.1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(82, 166, 117, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(82, 166, 117, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--white); /* 修改为白色背景 */
+            color: var(--primary-green); /* 修改为深色文本 */
+            border: 2px solid var(--primary-green); /* 修改为深色边框 */
+            backdrop-filter: blur(0px); /* 移除模糊 */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-green); /* 悬停背景色 */
+            border-color: var(--primary-green);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 英雄区卡片展示 */
+        .hero-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(3, 1fr);
+            gap: 1.2rem;
+            height: 600px;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+
+        .hero-card {
+            background: var(--white); /* 修改为白色背景 */
+            backdrop-filter: blur(0px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1); /* 修改为浅色边框 */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            color: var(--text-dark); /* 确保文本颜色为深色 */
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(82, 166, 117, 0.05), transparent); /* 减小透明度 */
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .hero-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(82, 166, 117, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* 调整阴影 */
+        }
+
+        .hero-card:hover::before {
+            opacity: 1;
+        }
+
+        .hero-card:nth-child(1) {
+            grid-column: 1 / 3;
+        }
+
+        .hero-card:nth-child(4) {
+            grid-column: 1 / 3;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-green); /* 图标颜色 */
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-dark); /* 修改为深色文本 */
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            opacity: 0.7; /* 调整透明度 */
+            line-height: 1.6;
+        }
+
+        /* 项目介绍区 */
+        .about-section {
+            padding: 8rem 5%;
+            background: var(--light-bg); /* 修改为浅色背景 */
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-tag {
+            color: var(--accent-green);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-dark); /* 修改为深色文本 */
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            opacity: 0.75;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .about-card {
+            background: var(--white); /* 修改为白色背景 */
+            backdrop-filter: blur(0px);
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid rgba(0, 0, 0, 0.1); /* 修改为浅色边框 */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-green), var(--light-green));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(82, 166, 117, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .about-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .about-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-dark); /* 修改为深色文本 */
+            margin-bottom: 1rem;
+        }
+
+        .about-card-text {
+            color: var(--text-dark);
+            opacity: 0.7;
+            line-height: 1.8;
+        }
+
+        /* 产品区 */
+        .products-section {
+            padding: 8rem 5%;
+            background: var(--white); /* 修改为白色背景 */
+        }
+
+        .products-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .product-card {
+            background: var(--light-bg); /* 修改为浅色背景 */
+            backdrop-filter: blur(0px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.1); /* 修改为浅色边框 */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(82, 166, 117, 0.3);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            height: 280px;
+            background: linear-gradient(135deg, rgba(82, 166, 117, 0.1), rgba(127, 199, 152, 0.15)); /* 调整颜色透明度 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: none; /* 移除深色覆盖 */
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(82, 166, 117, 0.15);
+            color: var(--primary-green); /* 修改为深色文本 */
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-dark); /* 修改为深色文本 */
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: var(--text-dark);
+            opacity: 0.7;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features {
+            list-style: none;
+        }
+
+        .product-features li {
+            padding: 0.5rem 0;
+            color: var(--text-dark);
+            opacity: 0.7;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* 页脚 */
+        footer {
+            padding: 5rem 5% 2rem;
+            background: var(--light-bg); /* 修改为浅色背景 */
+            border-top: 1px solid rgba(0, 0, 0, 0.1); /* 修改为浅色边框 */
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark); /* 修改为深色文本 */
+            margin-bottom: 1rem;
+        }
+
+        .footer-description {
+            color: var(--text-dark);
+            opacity: 0.6;
+            line-height: 1.8;
+        }
+
+        .footer-title {
+            font-weight: 600;
+            color: var(--text-dark); /* 修改为深色文本 */
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-dark);
+            opacity: 0.6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green); /* 悬停颜色 */
+        }
+
+        .footer-bottom {
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1); /* 修改为浅色边框 */
+            text-align: center;
+            color: var(--text-dark);
+            opacity: 0.4;
+        }
+
+        /* 滚动动画 */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 响应式 */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .hero-cards {
+                height: 500px;
+            }
+
+            .about-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-cards {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .hero-card:nth-child(1),
+            .hero-card:nth-child(4) {
+                grid-column: 1;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Carbon Island Logo" style="height: 40px; width: auto; margin-right: 10px;">
+                <div class="logo-text">
+                    <div class="logo-name">Carbon Island</div>
+                    <div class="logo-subtitle">碳吸岛</div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#products">产品系列</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero-section" id="home">
+        <div class="hero-background">
+            <div class="bg-image"></div>
+        </div>
+
+        <div class="floating-elements">
+            <div class="leaf">🍃</div>
+            <div class="leaf">🌿</div>
+            <div class="leaf">🍃</div>
+            <div class="leaf">🌱</div>
+            <div class="leaf">🍃</div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+               
+
+                <h1 class="hero-title">
+                    让建筑废弃物<br/>
+                    <span class="highlight">重获新生</span>
+                </h1>
+                <p class="hero-description">
+                    碳吸岛专注于将木材、玻璃、塑料、瓷砖等建筑废弃物，通过创意设计转化为承载文化内涵与实用功能的高附加值文创与家居产品，构建"回收—设计—生产—销售"一体化价值链。
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">36亿吨</span>
+                        <span class="stat-label">年建筑废弃物产生量</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">28%+</span>
+                        <span class="stat-label">环保创意市场年增速</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">材料可溯源透明</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary">探索产品 →</a>
+                    <a href="#about" class="btn btn-secondary">了解更多</a>
+                </div>
+            </div>
+
+            <div class="hero-cards">
+                <div class="hero-card">
+                    <div class="card-icon">🏗️</div>
+                    <div>
+                        <h3 class="card-title">建筑废弃物回收</h3>
+                        <p class="card-description">年产生量36亿吨，通过精细化分类回收，提升资源化利用率</p>
+                    </div>
+                </div>
+                <div class="hero-card">
+                    <div class="card-icon">🎨</div>
+                    <div>
+                        <h3 class="card-title">创意设计</h3>
+                        <p class="card-description">高附加值文创产品</p>
+                    </div>
+                </div>
+                <div class="hero-card">
+                    <div class="card-icon">🌱</div>
+                    <div>
+                        <h3 class="card-title">环保可持续</h3>
+                        <p class="card-description">可量化碳减排</p>
+                    </div>
+                </div>
+                <div class="hero-card">
+                    <div class="card-icon">🔗</div>
+                    <div>
+                        <h3 class="card-title">区块链溯源技术</h3>
+                        <p class="card-description">材料来源透明可验证，每件产品配备溯源二维码，建立完整信任体系</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="section-header">
+                <div class="section-tag">关于碳吸岛</div>
+                <h2 class="section-title">用创意赋予废弃材料新生命</h2>
+                <p class="section-description">
+                    碳吸岛致力于解决建筑废弃物高值化利用难题，打造连接城市记忆与可持续生活方式的创新平台
+                </p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card scroll-fade">
+                    <div class="about-icon">🎯</div>
+                    <h3 class="about-card-title">核心使命</h3>
+                    <p class="about-card-text">
+                        以建筑废弃物为核心原料，通过创意设计与区块链溯源技术，将废弃材料转化为承载文化内涵与实用功能的高附加值产品，实现"再生创造价值"的循环经济模式。
+                    </p>
+                </div>
+                <div class="about-card scroll-fade">
+                    <div class="about-icon">🔗</div>
+                    <h3 class="about-card-title">区块链溯源</h3>
+                    <p class="about-card-text">
+                        采用区块链技术确保材料来源透明可验证，每件产品配备溯源二维码，让消费者清楚了解材料的前世今生，建立完整的信任体系。
+                    </p>
+                </div>
+                <div class="about-card scroll-fade">
+                    <div class="about-icon">🌍</div>
+                    <h3 class="about-card-title">环境价值</h3>
+                    <p class="about-card-text">
+                        有效降低废料填埋、焚烧带来的环境负担，提升建筑废弃物资源化率与高值化利用水平，助力实现双碳目标，推动全民绿色消费习惯养成。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section" id="products">
+        <div class="products-container">
+            <div class="section-header">
+                <div class="section-tag">产品系列</div>
+                <h2 class="section-title">创意再生 · 品质生活</h2>
+                <p class="section-description">
+                    每件产品都承载着城市记忆与可持续理念，从家居实用到文创纪念，从标准产品到专属定制
+                </p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card scroll-fade">
+                    <div class="product-image">🪑</div>
+                    <div class="product-info">
+                        <span class="product-tag">家居实用类</span>
+                        <h3 class="product-name">再生木材制品</h3>
+                        <p class="product-description">
+                            精选上海本地老房拆迁的实木地板、旧门窗框架，打造猫屋、书架、咖啡桌、置物架等实用家居产品。
+                        </p>
+                        <ul class="product-features">
+                            <li>保留原木纹理与使用痕迹</li>
+                            <li>环保无毒害处理工艺</li>
+                            <li>承载城市历史记忆</li>
+                            <li>质地坚硬耐用持久</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-card scroll-fade">
+                    <div class="product-image">🏛️</div>
+                    <div class="product-info">
+                        <span class="product-tag">文创纪念类</span>
+                        <h3 class="product-name">建筑碎片藏品</h3>
+                        <p class="product-description">
+                            将历史建筑的木材、瓷砖切割封装，配备溯源卡片，成为城市发展的微观见证者。
+                        </p>
+                        <ul class="product-features">
+                            <li>独特的历史文化价值</li>
+                            <li>透明材料来源溯源</li>
+                            <li>精美透明盒展示设计</li>
+                            <li>可收藏传承的记忆载体</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-card scroll-fade">
+                    <div class="product-image">🎁</div>
+                    <div class="product-info">
+                        <span class="product-tag">定制服务类</span>
+                        <h3 class="product-name">企业定制礼品</h3>
+                        <p class="product-description">
+                            为注重ESG形象的企业提供融入品牌理念的定制礼品，传递可持续价值观。
+                        </p>
+                        <ul class="product-features">
+                            <li>个性化设计与品牌融合</li>
+                            <li>可量化碳减排成果展示</li>
+                            <li>品牌ESG故事传播载体</li>
+                            <li>员工福利与客户礼品首选</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">Carbon Island</div>
+                    <p class="footer-description">
+                        让建筑废弃物重获新生，打造连接城市记忆与可持续生活方式的创新平台。循环经济，再生创造价值。
+                    </p>
+                </div>
+                <div>
+                    <h4 class="footer-title">快速链接</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">关于我们</a></li>
+                        <li><a href="#products">产品系列</a></li>
+                        <li><a href="#">企业合作</a></li>
+                        <li><a href="#">加入我们</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">产品分类</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">家居实用类</a></li>
+                        <li><a href="#">文创纪念类</a></li>
+                        <li><a href="#">定制服务类</a></li>
+                        <li><a href="#">DIY材料包</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">联系我们</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@carbonisland.com">info@carbonisland.com</a></li>
+                        <li><a href="#">上海市试点基地</a></li>
+                        <li><a href="#">小红书官方</a></li>
+                        <li><a href="#">淘宝店铺</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2025 Carbon Island 碳吸岛 · 循环经济 · 再生创造价值
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 滚动动画
+        const scrollElements = document.querySelectorAll('.scroll-fade');
+        const elementInView = (el, offset = 100) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (elementTop <= ((window.innerHeight || document.documentElement.clientHeight) - offset));
+        };
+
+        const displayScrollElement = (element) => {
+            element.classList.add('visible');
+        };
+
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 100)) {
+                    displayScrollElement(el);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+        });
+
+        // 初始检查
+        handleScrollAnimation();
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = navbar.offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
